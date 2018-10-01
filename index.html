@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">    
+    <meta charset="UTF-8">
     <title>Canvas</title>
 </head>
-<body>
-    <canvas id="jogo" 
-    width="600" height="480"
-    style="border:1px solid #000000;">
 
+<body>
+    <canvas style="display: none;" id="jogo" width="600" height="480" style="border:1px solid #000000;">
     </canvas>
+    <table>
+        <tr>
+            <td colspan="2">Controles:</td>
+        </tr>
+        <tr>
+            <td>Cima:</td>
+            <td><input type="text" name="" id="keyCima"></td>
+        </tr>
+        <tr>
+            <td>Baixo:</td>
+            <td><input type="text" name="" id="keyBaixo"></td>
+        </tr>
+        <tr>
+            <td>Esquerda:</td>
+            <td><input type="text" name="" id="keyEsq"></td>
+        </tr>
+        <tr>
+            <td>Direita:</td>
+            <td><input type="text" name="" id="keyDir"></td>
+        </tr>
+    </table>
+
     <script src="jogo.js"></script>
 </body>
+
 </html>
