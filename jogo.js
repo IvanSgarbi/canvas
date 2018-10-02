@@ -11,8 +11,12 @@ class Objeto {
         this.posY = posY;
         this.velX = 0;
         this.velY = 0;
+        this.movimentarX = 0;
+        this.movimentarY = 0;
     }
     mover() {
+        movimentarX(this.movimentarX);
+        movimentarY(this.movimentarY);
         this.posX += this.velX;
         this.posY += this.velY;
     }
@@ -60,22 +64,30 @@ function comecarAnimacao(objetos) {
     }, 5);
 
 }
-function movimentarX(direcao){
-    if(direcao>0){
-        objetos[0].velX +=0.2;
-    }else if(direcao<0){
-        objetos[0].velX -=0.2;
-    }else{
+function movimentarX(direcao) {
+    if (direcao > 0) {
+        if (objetos[0].velX <= 3) {
+            objetos[0].velX += 0.2;
+        }
+    } else if (direcao < 0) {
+        if (objetos[0].velX >= -3) {
+            objetos[0].velX -= 0.2;
+        }
+    } else {
         pararX();
     }
 }
 
 function movimentarY(direcao) {
-    if(direcao>0){
-        objetos[0].velY += 0.2;
-    }else if(direcao<0){
-        objetos[0].velY -= 0.2;
-    }else{
+    if (direcao > 0) {
+        if (objetos[0].velY <= 3) {
+            objetos[0].velY += 0.2;
+        }
+    } else if (direcao < 0) {
+        if (objetos[0].velY >= -3) {
+            objetos[0].velY -= 0.2;
+        }
+    } else {
         pararY();
     }
 }
@@ -142,17 +154,17 @@ document.onkeydown = function (event) {
     log("Tecla: " + event.keyCode + " e " + x);
     if (x == controles.cima) {
         log("cima");
-        movimentarY(-1);        
+        objetos[0].movimentarY = -1;
     } else if (x == controles.baixo) {
         log("baixo");
-        movimentarY(1);
+        objetos[0].movimentarY = 1;
     }
     if (x == controles.esquerda) {
         log("esquerda");
-        movimentarX(-1);
+        objetos[0].movimentarX = -1;
     } else if (x == controles.direita) {
         log("direita");
-        movimentarX(1);
+        objetos[0].movimentarX = 1;
     }
 }
 
@@ -163,23 +175,23 @@ document.onkeyup = function (event) {
     if (x == controles.cima) {
         log("cima");
         if (objetos[0].velY < 0) {
-            pararY();
+            objetos[0].movimentarY = 0;
         }
     } else if (x == controles.baixo) {
         log("baixo");
         if (objetos[0].velY > 0) {
-            pararY();
+            objetos[0].movimentarY = 0;
         }
     }
     if (x == controles.esquerda) {
         log("esquerda");
         if (objetos[0].velX < 0) {
-            pararX();
+            objetos[0].movimentarX = 0;
         }
     } else if (x == controles.direita) {
         log("direita");
         if (objetos[0].velX > 0) {
-            pararX();
+            objetos[0].movimentarX = 0;
         }
     }
 }
