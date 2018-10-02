@@ -62,7 +62,7 @@ function comecarAnimacao(objetos) {
             objetos[cont].mover();
         }
     }, 5);
-
+    log(tempo);
 }
 function movimentarX(direcao) {
     if (direcao > 0) {
@@ -203,6 +203,7 @@ document.getElementById("keyCima").onkeyup = function (event) {
     attControles();
     document.getElementById("keyBaixo").focus();
 }
+
 document.getElementById("keyCima").onkeydown = function (event) {
     event.preventDefault();
     this.value = "";
@@ -215,6 +216,7 @@ document.getElementById("keyBaixo").onkeyup = function (event) {
     attControles();
     document.getElementById("keyEsq").focus();
 }
+
 document.getElementById("keyBaixo").onkeydown = function (event) {
     event.preventDefault();
     this.value = "";
@@ -227,6 +229,7 @@ document.getElementById("keyEsq").onkeyup = function (event) {
     attControles();
     document.getElementById("keyDir").focus();
 }
+
 document.getElementById("keyEsq").onkeydown = function (event) {
     event.preventDefault();
     this.value = "";
@@ -239,6 +242,7 @@ document.getElementById("keyDir").onkeyup = function (event) {
     attControles();
     this.blur();
 }
+
 document.getElementById("keyDir").onkeydown = function (event) {
     event.preventDefault();
     this.value = "";
