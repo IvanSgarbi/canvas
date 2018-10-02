@@ -22,7 +22,6 @@ function log(mensagem) {
     if (logs) {
         console.log(mensagem);
     }
-
 }
 
 function desenhar(imagem, posX, posY) {
@@ -61,6 +60,32 @@ function comecarAnimacao(objetos) {
     }, 5);
 
 }
+function movimentarX(direcao){
+    if(direcao>0){
+        objetos[0].velX +=0.2;
+    }else if(direcao<0){
+        objetos[0].velX -=0.2;
+    }else{
+        pararX();
+    }
+}
+
+function movimentarY(direcao) {
+    if(direcao>0){
+        objetos[0].velY += 0.2;
+    }else if(direcao<0){
+        objetos[0].velY -= 0.2;
+    }else{
+        pararY();
+    }
+}
+function pararY() {
+    objetos[0].velY = 0;
+}
+function pararX() {
+    objetos[0].velX = 0;
+}
+
 function attControles() {
     document.getElementById("cima").innerText = controles.cima;
     document.getElementById("baixo").innerText = controles.baixo;
@@ -82,7 +107,7 @@ var controles = {
     baixo: 40,
     esquerda: 37,
     direita: 39
-};
+}
 var timer;
 var cont;
 var logs = true;
@@ -117,17 +142,17 @@ document.onkeydown = function (event) {
     log("Tecla: " + event.keyCode + " e " + x);
     if (x == controles.cima) {
         log("cima");
-        objetos[0].velY = -1;
+        movimentarY(-1);        
     } else if (x == controles.baixo) {
         log("baixo");
-        objetos[0].velY = 1;
+        movimentarY(1);
     }
     if (x == controles.esquerda) {
         log("esquerda");
-        objetos[0].velX = -1;
+        movimentarX(-1);
     } else if (x == controles.direita) {
         log("direita");
-        objetos[0].velX = 1;
+        movimentarX(1);
     }
 }
 
@@ -138,23 +163,23 @@ document.onkeyup = function (event) {
     if (x == controles.cima) {
         log("cima");
         if (objetos[0].velY < 0) {
-            objetos[0].velY = 0;
+            pararY();
         }
     } else if (x == controles.baixo) {
         log("baixo");
         if (objetos[0].velY > 0) {
-            objetos[0].velY = 0;
+            pararY();
         }
     }
     if (x == controles.esquerda) {
         log("esquerda");
         if (objetos[0].velX < 0) {
-            objetos[0].velX = 0;
+            pararX();
         }
     } else if (x == controles.direita) {
         log("direita");
         if (objetos[0].velX > 0) {
-            objetos[0].velX = 0;
+            pararX();
         }
     }
 }
