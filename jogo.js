@@ -11,17 +11,57 @@ class Objeto {
         this.posY = posY;
         this.velX = 0;
         this.velY = 0;
-        this.acelerarX = 0;
-        this.acelerarY = 0;
+        this.direcaoX = 0;
+        this.direcaoY = 0;
     }
     mover() {
-        acelerarX(this.acelerarX);
-        acelerarY(this.acelerarY);
-        this.posX += this.velX;
-        this.posY += this.velY;
+        this.acelerarX(this.direcaoX);
+        this.acelerarY(this.direcaoY);
+        if (!(this.velX == 0)) {
+            this.posX += this.velX;
+        }
+        if (!(this.velY == 0)) {
+            this.posY += this.velY;
+        }
+    }
+    acelerarX(direcao) {
+        if (direcao != 0) {
+            log("Valor da direção q chega na função de acelerar o X:" + direcao);
+        }
+
+        if (direcao > 0) {
+            if (this.velX <= 3) {
+                this.velX += 0.2;
+            }
+        } else if (direcao < 0) {
+            if (this.velX >= -3) {
+                this.velX -= 0.2;
+            }
+        } else {
+            this.pararX();
+        }
+    }
+
+    acelerarY(direcao) {
+        if (direcao > 0) {
+            if (this.velY <= 3) {
+                this.velY += 0.2;
+            }
+        } else if (direcao < 0) {
+            if (this.velY >= -3) {
+                this.velY -= 0.2;
+            }
+        } else {
+            this.pararY();
+        }
+    }
+    pararY() {
+        this.velY = 0;
+    }
+    pararX() {
+        this.velX = 0;
     }
 }
-
 function log(mensagem) {
     if (logs) {
         console.log(mensagem);
@@ -64,39 +104,8 @@ function comecarAnimacao(objetos) {
     }, 5);
     log(tempo);
 }
-function acelerarX(direcao) {
-    if (direcao > 0) {
-        if (objetos[0].velX <= 3) {
-            objetos[0].velX += 0.2;
-        }
-    } else if (direcao < 0) {
-        if (objetos[0].velX >= -3) {
-            objetos[0].velX -= 0.2;
-        }
-    } else {
-        pararX();
-    }
-}
 
-function acelerarY(direcao) {
-    if (direcao > 0) {
-        if (objetos[0].velY <= 3) {
-            objetos[0].velY += 0.2;
-        }
-    } else if (direcao < 0) {
-        if (objetos[0].velY >= -3) {
-            objetos[0].velY -= 0.2;
-        }
-    } else {
-        pararY();
-    }
-}
-function pararY() {
-    objetos[0].velY = 0;
-}
-function pararX() {
-    objetos[0].velX = 0;
-}
+
 
 function attControles() {
     document.getElementById("cima").innerText = controles.cima;
@@ -154,17 +163,17 @@ document.onkeydown = function (event) {
     log("Tecla: " + event.keyCode + " e " + x);
     if (x == controles.cima) {
         log("cima");
-        objetos[0].acelerarY = -1;
+        objetos[0].direcaoY = -1;
     } else if (x == controles.baixo) {
         log("baixo");
-        objetos[0].acelerarY = 1;
+        objetos[0].direcaoY = 1;
     }
     if (x == controles.esquerda) {
         log("esquerda");
-        objetos[0].acelerarX = -1;
+        objetos[0].direcaoX = -1;
     } else if (x == controles.direita) {
         log("direita");
-        objetos[0].acelerarX = 1;
+        objetos[0].direcaoX = 1;
     }
 }
 
@@ -173,26 +182,21 @@ document.onkeyup = function (event) {
     var x = event.keyCode;
     log("Tecla: " + event.keyCode + " e " + x);
     if (x == controles.cima) {
-        log("cima");
-        if (objetos[0].velY < 0) {
-            objetos[0].acelerarY = 0;
-        }
+        log("solta cima");
+        objetos[0].direcaoY = 0;
+
     } else if (x == controles.baixo) {
-        log("baixo");
-        if (objetos[0].velY > 0) {
-            objetos[0].acelerarY = 0;
-        }
+        log("solta baixo");
+        objetos[0].direcaoY = 0;
     }
     if (x == controles.esquerda) {
-        log("esquerda");
-        if (objetos[0].velX < 0) {
-            objetos[0].acelerarX = 0;
-        }
+        log("solta esquerda");
+        objetos[0].direcaoX = 0;
+
     } else if (x == controles.direita) {
-        log("direita");
-        if (objetos[0].velX > 0) {
-            objetos[0].acelerarX = 0;
-        }
+        log("solta direita");
+        objetos[0].direcaoX = 0;
+
     }
 }
 
